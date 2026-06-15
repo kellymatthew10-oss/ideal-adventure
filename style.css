@@ -89,6 +89,7 @@ main {
 
 .section {
   margin-bottom: var(--section-gap);
+  scroll-margin-top: 6rem;
 }
 
 .section:last-child {
@@ -328,6 +329,56 @@ main {
   text-decoration: underline;
   text-decoration-color: var(--link-underline);
 }
+
+/* ── Work detail (inline proof sections) ──────────────────────── */
+
+.work-detail {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.work-detail-header {
+  margin-bottom: 3rem;
+}
+
+.work-detail-eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.65rem;
+}
+
+.work-detail-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.75rem;
+}
+
+.work-detail-intro {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  max-width: 36rem;
+}
+
+.work-detail .media-block {
+  margin-bottom: 3.5rem;
+}
+
+.work-detail .media-block:last-child {
+  margin-bottom: 0;
+}
+
+/* Stagger work detail media blocks */
+.work-detail .media-block.fade-in:nth-child(2) { transition-delay: 0s; }
+.work-detail .media-block.fade-in:nth-child(3) { transition-delay: 0.08s; }
+.work-detail .media-block.fade-in:nth-child(4) { transition-delay: 0.16s; }
+.work-detail .media-block.fade-in:nth-child(5) { transition-delay: 0.24s; }
 
 /* ── Contact ──────────────────────────────────────────────────── */
 

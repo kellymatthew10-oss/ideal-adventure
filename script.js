@@ -49,6 +49,22 @@
   }
 
   // ── Smooth scroll for anchor links ───────────────────────────
+  function scrollToSection(targetId, behavior) {
+    const target = document.querySelector(targetId);
+    if (!target) return;
+
+    const headerHeight = header ? header.offsetHeight : 0;
+    const targetTop =
+      target.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
+
+    window.scrollTo({
+      top: targetTop,
+      behavior: behavior || (prefersReducedMotion ? "auto" : "smooth"),
+    });
+
+    history.pushState(null, "", targetId);
+  }
+
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", (e) => {
       const targetId = anchor.getAttribute("href");
@@ -58,19 +74,16 @@
       if (!target) return;
 
       e.preventDefault();
-
-      const headerHeight = header ? header.offsetHeight : 0;
-      const targetTop =
-        target.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
-
-      window.scrollTo({
-        top: targetTop,
-        behavior: prefersReducedMotion ? "auto" : "smooth",
-      });
-
-      history.pushState(null, "", targetId);
+      scrollToSection(targetId);
     });
   });
+
+  // Scroll to hash on load (e.g. index.html#performance)
+  if (window.location.hash) {
+    requestAnimationFrame(() => {
+      scrollToSection(window.location.hash, "auto");
+    });
+  }
 
   // ── Subtle parallax on hero intro (name + headshot) ───────────
   const heroIntro = document.querySelector(".hero-intro");
